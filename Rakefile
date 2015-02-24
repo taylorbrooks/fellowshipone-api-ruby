@@ -1,25 +1,11 @@
-require 'rspec/core/rake_task'
+require "bundler/gem_tasks"
+require "rake/testtask"
 
-
-desc 'Default: run specs.'
-task :default => :spec
-task :test => :spec
-
-desc "Run specs"
-RSpec::Core::RakeTask.new do |t|
-  t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
-  # Put spec opts in a file named .rspec in root
+Rake::TestTask.new do |t|
+  t.pattern = "test/**/*_test.rb"
 end
 
-
-desc "Generate code coverage"
-RSpec::Core::RakeTask.new(:coverage) do |t|
-  t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
-  t.rcov = true
-  t.rcov_opts = ['--exclude', 'spec']
-end
-
-
+task default: :test
 
 namespace :docs do
 
